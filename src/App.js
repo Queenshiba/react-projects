@@ -1,60 +1,71 @@
 
-import './App.css';
 import React from 'react';
+import './App.css';
 
 
-class App extends React.Component {
+// const reptiles = ['alligator', 'snake', 'lizard', 'test'];
+
+class ListForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos: [],
-      value: ''
+      value: '',
+      todos: []
     };
 
-  }
-  submitValue(params) {
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleInput = this.handleInput.bind(this);
 
   }
 
-  handleChange(event) {
-    this.setState({ value: event.target.value })
-  }
-  addTodo(e) {
+  handleSubmit(e) {
+
+    e.preventDefault()
     this.setState({
-      todos: [...this.state.todos, this.state.value],
-      value: ''
+      todos: [...this.state.todos, this.state.value]
     })
-  e.preventDefault()
+
+    // this.setState({
+    //   todos: [...this.state.todos, this.state.value]
+    // },()=>{console.log('second', this.state)})
+
+    console.log('first', this.state.value)
   }
+
+
+  handleInput(e) {
+    this.setState({ value: e.target.value })
+  }
+
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1>To Do List</h1>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" name="name" value={this.state.value} onChange={this.handleInput} />
+          <input type="submit" value="Add" />
+          <div className="list">
+            <ul>
 
-        </header>
+              {this.state.todos.map(item => (
+              <li >{item}</li>
+            ))}
+            </ul>
+          </div>
 
-
-        <div className="input-container">
-          <form onSubmit={(e) => this.addTodo(e)}>
-            <input className="input" placeholder="Type something..." type="text" name="name" value={this.state.value} onChange={(e) => this.handleChange(e)} />
-            <input className="add-btn" type="submit" value="Add" />
-          </form>
-{
-  this.state.todos.map((todo, index) => {
-    return (<div key={todo+index}>{todo}</div>)
-  })
-}
-
-
-          <div className="todolist">list here</div>
-        </div>
-
+        </form>
+        {/* <button onClick={this.handleSubmit}>btn</button> */}
       </div>
+
+
+
+
+
     );
+
   }
 
 }
 
-export default App;
+
+export default ListForm;
