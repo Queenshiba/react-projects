@@ -1,9 +1,15 @@
-.App {
+.wrap, .list {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+/* 
+input {
+  height: 2rem;
+} */
 
-body {
-  background-color: lightgray;
+.list {
+  margin: 10px;
+  background-color:lightgray;
+  text-decoration: underline;
 }

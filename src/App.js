@@ -30,6 +30,9 @@ class ListForm extends React.Component {
     // },()=>{console.log('second', this.state)})
 
     console.log('first', this.state.value)
+    this.setState({
+      value: ''
+    });
   }
 
 
@@ -40,21 +43,24 @@ class ListForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="wrap">
+        <h1>To Do List</h1>
+
         <form onSubmit={this.handleSubmit}>
-          <input type="text" name="name" value={this.state.value} onChange={this.handleInput} />
+          <input type="text" name="name" value={this.state.value} onChange={this.handleInput} placeholder="Type things to do here"/>
           <input type="submit" value="Add" />
           <div className="list">
+            <h2>List</h2>
             <ul>
 
               {this.state.todos.map(item => (
-              <li >{item}</li>
-            ))}
+                <li >{item}</li>
+              ))}
             </ul>
           </div>
 
         </form>
-        {/* <button onClick={this.handleSubmit}>btn</button> */}
+
       </div>
 
 
