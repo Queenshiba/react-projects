@@ -7,9 +7,22 @@
 input {
   height: 2rem;
 } */
-
 .list {
+    background-color:lightgray;
+}
+h2  {
   margin: 10px;
-  background-color:lightgray;
+
   text-decoration: underline;
+}
+
+.todolist {
+  background-color: gray;
+  color: white;
+  width: 200px;
+  padding: 10px;
+  text-decoration: none;
+}
+.todolist:hover {
+  background-color: rgb(51, 51, 51);
 }

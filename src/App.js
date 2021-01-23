@@ -15,7 +15,7 @@ class ListForm extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInput = this.handleInput.bind(this);
-
+    this.strikeThroughTodos = this.strikeThroughTodos.bind(this);
   }
 
   handleSubmit(e) {
@@ -40,6 +40,14 @@ class ListForm extends React.Component {
     this.setState({ value: e.target.value })
   }
 
+strikeThroughTodos(e) {
+
+  this.state.todos.map(e => (
+
+    <div className="todolist" onClick={this.strikeThroughTodos} style={{ textDecoration: "line-through"}}>{e}</div>
+))
+console.log (this.state.todos)
+  }
 
   render() {
     return (
@@ -47,16 +55,18 @@ class ListForm extends React.Component {
         <h1>To Do List</h1>
 
         <form onSubmit={this.handleSubmit}>
-          <input type="text" name="name" value={this.state.value} onChange={this.handleInput} placeholder="Type things to do here"/>
+          <input type="text" name="name" value={this.state.value} onChange={this.handleInput} placeholder="Type things to do here" />
           <input type="submit" value="Add" />
           <div className="list">
             <h2>List</h2>
-            <ul>
+            <div>
 
               {this.state.todos.map(item => (
-                <li >{item}</li>
+
+                  <div className="todolist" onClick={this.strikeThroughTodos} >{item}</div>
               ))}
-            </ul>
+
+            </div>
           </div>
 
         </form>
