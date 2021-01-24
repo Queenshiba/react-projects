@@ -26,3 +26,7 @@ h2  {
 .todolist:hover {
   background-color: rgb(51, 51, 51);
 }
+.remove-btn {
+  background-color: white;
+  margin-left: 40%;
+}

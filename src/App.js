@@ -10,7 +10,8 @@ class ListForm extends React.Component {
     super(props);
     this.state = {
       value: '',
-      todos: []
+      todos: [],
+      color: ""
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,7 +30,7 @@ class ListForm extends React.Component {
     //   todos: [...this.state.todos, this.state.value]
     // },()=>{console.log('second', this.state)})
 
-    console.log('first', this.state.value)
+    // console.log('first', this.state.value)
     this.setState({
       value: ''
     });
@@ -40,13 +41,18 @@ class ListForm extends React.Component {
     this.setState({ value: e.target.value })
   }
 
-strikeThroughTodos(e) {
+  strikeThroughTodos(e) {
+    // this.setState({
+    //   color: "red"
+    // })
+    // style={{backgroundColor: this.state.color}}
 
-  this.state.todos.map(e => (
 
-    <div className="todolist" onClick={this.strikeThroughTodos} style={{ textDecoration: "line-through"}}>{e}</div>
-))
-console.log (this.state.todos)
+    console.log('click div first item', this.state.todos)
+  }
+
+  removeTodos = () => {
+alert('test')
   }
 
   render() {
@@ -62,8 +68,8 @@ console.log (this.state.todos)
             <div>
 
               {this.state.todos.map(item => (
+                <div className="todolist" onClick={this.strikeThroughTodos}>{item}<button className="remove-btn" onClick={this.removeTodos}>Remove</button></div>
 
-                  <div className="todolist" onClick={this.strikeThroughTodos} >{item}</div>
               ))}
 
             </div>
