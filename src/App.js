@@ -16,7 +16,8 @@ class ListForm extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInput = this.handleInput.bind(this);
-    this.strikeThroughTodos = this.strikeThroughTodos.bind(this);
+    // this.strikeThroughTodos = this.strikeThroughTodos.bind(this);
+    this.removeTodos = this.removeTodos.bind(this);
   }
 
   handleSubmit(e) {
@@ -41,18 +42,21 @@ class ListForm extends React.Component {
     this.setState({ value: e.target.value })
   }
 
-  strikeThroughTodos(e) {
+  // strikeThroughTodos(e) {
     // this.setState({
     //   color: "red"
     // })
     // style={{backgroundColor: this.state.color}}
 
+  // }
 
-    console.log('click div first item', this.state.todos)
-  }
-
-  removeTodos = () => {
-alert('test')
+  removeTodos = (e) => {
+    let { todos } = this.state;
+    todos.splice(e, 1);
+    this.setState({
+        todos: todos
+    })
+    
   }
 
   render() {
@@ -67,10 +71,12 @@ alert('test')
             <h2>List</h2>
             <div>
 
-              {this.state.todos.map(item => (
-                <div className="todolist" onClick={this.strikeThroughTodos}>{item}<button className="remove-btn" onClick={this.removeTodos}>Remove</button></div>
+              {this.state.todos.map((item, index) => 
+                (
+                  <div className="todolist" key={index}>{item}{index}<button className="remove-btn" onClick={(e) => this.removeTodos(e)}>Remove</button></div>
 
-              ))}
+                )
+              )}
 
             </div>
           </div>
