@@ -19,14 +19,16 @@ h2  {
 .todolist {
   background-color: gray;
   color: white;
-  width: 200px;
+  width: 300px;
   padding: 10px;
   text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 .todolist:hover {
   background-color: rgb(51, 51, 51);
 }
-.remove-btn {
+.remove-btn, .done-btn {
   background-color: white;
-  margin-left: 40%;
 }
