@@ -46,11 +46,12 @@ class ListForm extends React.Component {
   }
 
   strikeThroughTodos = (index) => {
+  
     this.setState({
       strikeThrough: 'line-through'
     })
     
-
+// use if statement in stytle
   }
 
   removeTodos = (index) => {
@@ -79,7 +80,7 @@ class ListForm extends React.Component {
               {/* {this.state.todos} */}
               {this.state.todos.map((item, index) =>
               (
-                <div className="todolist" key={item + this.state.randomNum} style={{ textDecoration: this.state.strikeThrough }}>
+                <div className="todolist" key={item + this.state.randomNum} style={{textDecoration : this.state.strikeThrough}}>
                   {item}
                   <button className="remove-btn" onClick={() => this.removeTodos(index)}>Remove</button>
                   <button className="done-btn" onClick={() => this.strikeThroughTodos(index)}>Done</button>
