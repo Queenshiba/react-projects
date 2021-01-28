@@ -17,7 +17,7 @@ class ListForm extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInput = this.handleInput.bind(this);
-    this.strikeThroughTodos = this.strikeThroughTodos.bind(this);
+    // this.strikeThroughTodos = this.strikeThroughTodos.bind(this);
     this.removeTodos = this.removeTodos.bind(this);
   }
 
@@ -45,14 +45,14 @@ class ListForm extends React.Component {
     this.setState({ value: e.target.value })
   }
 
-  strikeThroughTodos = (index) => {
+//   strikeThroughTodos = (index) => {
   
-    this.setState({
-      strikeThrough: 'line-through'
-    })
+//     this.setState({
+//       strikeThrough: 'line-through'
+//     })
     
-// use if statement in stytle
-  }
+// // use if statement in stytle
+  // }
 
   removeTodos = (index) => {
     // let { todos } = this.state;
@@ -83,7 +83,7 @@ class ListForm extends React.Component {
                 <div className="todolist" key={item + this.state.randomNum} style={{textDecoration : this.state.strikeThrough}}>
                   {item}
                   <button className="remove-btn" onClick={() => this.removeTodos(index)}>Remove</button>
-                  <button className="done-btn" onClick={() => this.strikeThroughTodos(index)}>Done</button>
+                  {/* <button className="done-btn" onClick={() => this.strikeThroughTodos(index)}>Done</button> */}
                 </div>
               )
               )}
