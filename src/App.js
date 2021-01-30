@@ -1,9 +1,9 @@
 
 import React from 'react';
+import { unmountComponentAtNode } from 'react-dom';
 import './App.css';
 
 
-// const reptiles = ['alligator', 'snake', 'lizard', 'test'];
 
 class ListForm extends React.Component {
   constructor(props) {
@@ -17,42 +17,42 @@ class ListForm extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInput = this.handleInput.bind(this);
-    // this.strikeThroughTodos = this.strikeThroughTodos.bind(this);
+    this.strikeThroughTodos = this.strikeThroughTodos.bind(this);
     this.removeTodos = this.removeTodos.bind(this);
   }
 
   handleSubmit(e) {
-
     e.preventDefault()
-    this.setState({
-      todos: [...this.state.todos, this.state.value]
-    })
-
-    // this.setState({
-    //   todos: [...this.state.todos, this.state.value]
-    // },()=>{console.log('second', this.state)})
-
-    // console.log('first', this.state.value)
     let randomNum = Math.random()
-    // console.log(randomNum)
     this.setState({
+      todos: [...this.state.todos, {
+        todo: this.state.value,
+        done: false
+      }],
       value: '',
       randomNum: randomNum
     })
+    console.log('handleSubmit')
   }
 
   handleInput(e) {
     this.setState({ value: e.target.value })
   }
 
-//   strikeThroughTodos = (index) => {
-  
-//     this.setState({
-//       strikeThrough: 'line-through'
-//     })
-    
-// // use if statement in stytle
-  // }
+  strikeThroughTodos = (selectedTodoIndex) => {
+    const updated = this.state.todos.map((todo, index) => {
+      if (selectedTodoIndex === index) {
+        todo.done = true
+        return todo
+      } else {
+        return todo
+      }
+    });
+
+    this.setState({
+      todos: updated
+    });
+  }
 
   removeTodos = (index) => {
     // let { todos } = this.state;
@@ -80,10 +80,10 @@ class ListForm extends React.Component {
               {/* {this.state.todos} */}
               {this.state.todos.map((item, index) =>
               (
-                <div className="todolist" key={item + this.state.randomNum} style={{textDecoration : this.state.strikeThrough}}>
-                  {item}
-                  <button className="remove-btn" onClick={() => this.removeTodos(index)}>Remove</button>
-                  {/* <button className="done-btn" onClick={() => this.strikeThroughTodos(index)}>Done</button> */}
+                <div className="todolist" key={item.todo + this.state.randomNum} style={{ textDecoration: item.done ? 'line-through' : 'none' }}>
+                  {item.todo}
+                  <button type='button' className="remove-btn" onClick={() =>  this.removeTodos(index)}>Remove</button>
+                  <button type='button' className="done-btn" onClick={() => this.strikeThroughTodos(index)}>Done</button>
                 </div>
               )
               )}
