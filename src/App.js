@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { unmountComponentAtNode } from 'react-dom';
 import './App.css';
 
 
@@ -19,6 +18,7 @@ class ListForm extends React.Component {
     this.handleInput = this.handleInput.bind(this);
     this.strikeThroughTodos = this.strikeThroughTodos.bind(this);
     this.removeTodos = this.removeTodos.bind(this);
+    this.editTodos = this.editTodos.bind(this);
   }
 
   handleSubmit(e) {
@@ -32,7 +32,7 @@ class ListForm extends React.Component {
       value: '',
       randomNum: randomNum
     })
-    console.log('handleSubmit')
+    // console.log('handleSubmit')
   }
 
   handleInput(e) {
@@ -62,9 +62,20 @@ class ListForm extends React.Component {
     this.setState({
       todos: copyTodos
     }, () => console.log(this.state.todos))
-
-
   }
+
+editTodos = (index) => {
+  
+  const edited = this.state.todos.map((todo, index) => {
+    todo.todo = 'edited'
+
+  });
+
+this.setState({
+  todo: edited
+})
+}
+
 
   render() {
     return (
@@ -82,7 +93,8 @@ class ListForm extends React.Component {
               (
                 <div className="todolist" key={item.todo + this.state.randomNum} style={{ textDecoration: item.done ? 'line-through' : 'none' }}>
                   {item.todo}
-                  <button type='button' className="remove-btn" onClick={() =>  this.removeTodos(index)}>Remove</button>
+                  <button type='button' className="remove-btn" onClick={() => this.removeTodos(index)}>Remove</button>
+                  <button type='button' className="edit-btn" onClick={() => this.editTodos(index)}>Edit</button>
                   <button type='button' className="done-btn" onClick={() => this.strikeThroughTodos(index)}>Done</button>
                 </div>
               )
