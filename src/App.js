@@ -64,17 +64,21 @@ class ListForm extends React.Component {
     }, () => console.log(this.state.todos))
   }
 
-editTodos = (index) => {
-  
-  const edited = this.state.todos.map((todo, index) => {
-    todo.todo = 'edited'
+  editTodos = (selectedTodoIndex) => {
 
-  });
+    const edited = this.state.todos.map((todo, index) => {
+      if (selectedTodoIndex === index) {
+       return todo.todo = "edited!"
+      }else {
+        return todo.todo
+      }
 
-this.setState({
-  todo: edited
-})
-}
+    });
+
+    this.setState({
+      todo: edited
+    })
+  }
 
 
   render() {
