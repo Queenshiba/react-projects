@@ -40,7 +40,7 @@ class ListForm extends React.Component {
   }
 
   strikeThroughTodos = (selectedTodoIndex) => {
-    const updated = this.state.todos.map((todo, index) => {
+    const strikeThrough = this.state.todos.map((todo, index) => {
       if (selectedTodoIndex === index) {
         todo.done = true
         return todo
@@ -50,7 +50,7 @@ class ListForm extends React.Component {
     });
 
     this.setState({
-      todos: updated
+      todos: strikeThrough
     });
   }
 
@@ -68,13 +68,14 @@ class ListForm extends React.Component {
 
     const edited = this.state.todos.map((todo, index) => {
       if (selectedTodoIndex === index) {
-       return todo.todo = "edited!"
-      }else {
+        return todo.todo = "edited!"
+      } else {
         return todo.todo
       }
 
     });
 
+   
     this.setState({
       todo: edited
     })
@@ -87,6 +88,8 @@ class ListForm extends React.Component {
         <h1>To Do List</h1>
 
         <form onSubmit={this.handleSubmit}>
+        <input type="text" name="name"  style={{ display: 'none' }} />
+          <input type="submit" value="Updated"  style={{ display: 'none'}} />
           <input type="text" name="name" value={this.state.value} onChange={this.handleInput} placeholder="Type things to do here" />
           <input type="submit" value="Add" />
           <div className="list">

@@ -32,3 +32,6 @@ h2  {
 .remove-btn, .done-btn {
   background-color: white;
 }
+.hidden {
+  display: none;
+}
