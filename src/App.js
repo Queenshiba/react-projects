@@ -10,7 +10,7 @@ class ListForm extends React.Component {
     this.state = {
       value: '',
       todos: [],
-      // strikeThrough: '',
+      editInput: false,
       randomNum: ''
     };
 
@@ -30,6 +30,7 @@ class ListForm extends React.Component {
         done: false
       }],
       value: '',
+      editInput: false,
       randomNum: randomNum
     })
     // console.log('handleSubmit')
@@ -75,10 +76,12 @@ class ListForm extends React.Component {
 
     });
 
-   
+
     this.setState({
-      todo: edited
+      todo: edited,
+      editInput: true
     })
+
   }
 
 
@@ -88,8 +91,12 @@ class ListForm extends React.Component {
         <h1>To Do List</h1>
 
         <form onSubmit={this.handleSubmit}>
-        <input type="text" name="name"  style={{ display: 'none' }} />
-          <input type="submit" value="Updated"  style={{ display: 'none'}} />
+          <input type="text" name="name" style={{
+            display: this.state.editInput ? 'block' : 'none'
+          }} />
+          <input type="submit" value="Updated" style={{
+            display: this.state.editInput ? 'block' : 'none'
+          }} />
           <input type="text" name="name" value={this.state.value} onChange={this.handleInput} placeholder="Type things to do here" />
           <input type="submit" value="Add" />
           <div className="list">
