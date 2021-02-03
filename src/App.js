@@ -91,12 +91,21 @@ class ListForm extends React.Component {
         <h1>To Do List</h1>
 
         <form onSubmit={this.handleSubmit}>
-          <input type="text" name="name" style={{
+          {this.state.editInput && (
+            <div>
+              <input type="text" />
+              <button type="button">update</button>
+            </div>
+          )}
+
+          {/* <input type="text" name="name" style={{
             display: this.state.editInput ? 'block' : 'none'
           }} />
-          <input type="submit" value="Updated" style={{
+          <button type="button" value="Update" style={{
             display: this.state.editInput ? 'block' : 'none'
-          }} />
+          }}>update</button> */}
+
+
           <input type="text" name="name" value={this.state.value} onChange={this.handleInput} placeholder="Type things to do here" />
           <input type="submit" value="Add" />
           <div className="list">
