@@ -69,10 +69,8 @@ class ListForm extends React.Component {
 
     const edited = this.state.todos.map((todo, index) => {
       if (selectedTodoIndex === index) {
-        return todo.todo = "edited!"
-      } else {
         return todo.todo
-      }
+      } 
 
     });
 
@@ -93,7 +91,7 @@ class ListForm extends React.Component {
         <form onSubmit={this.handleSubmit}>
           {this.state.editInput && (
             <div>
-              <input type="text" />
+              <input type="text" value={this.state.todo} />
               <button type="button">update</button>
             </div>
           )}
