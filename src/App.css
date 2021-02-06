@@ -19,12 +19,12 @@ h2  {
 .todolist {
   background-color: gray;
   color: white;
-  width: 300px;
+  /* width: 100%; */
   padding: 10px;
   text-decoration: none;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
 }
 .todolist:hover {
   background-color: rgb(51, 51, 51);
@@ -32,6 +32,7 @@ h2  {
 .remove-btn, .done-btn {
   background-color: white;
 }
-.hidden {
-  display: none;
+.edit-input-container {
+  display: flex;
+  flex-direction: row;
 }

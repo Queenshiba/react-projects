@@ -11,7 +11,9 @@ class ListForm extends React.Component {
       value: '',
       todos: [],
       editInput: false,
-      randomNum: ''
+      randomNum: '',
+      updatedValue: '',
+      editedText: ''
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -70,10 +72,9 @@ class ListForm extends React.Component {
     const edited = this.state.todos.map((todo, index) => {
       if (selectedTodoIndex === index) {
         return todo.todo
-      } 
+      }
 
     });
-
 
     this.setState({
       todo: edited,
@@ -81,7 +82,13 @@ class ListForm extends React.Component {
     })
 
   }
-
+updateEdit = () => {
+console.log(this.state.updatedValue)
+// alert(this.state.todos)
+this.setState({
+  editedText: this.state.value
+})
+}
 
   render() {
     return (
@@ -89,40 +96,37 @@ class ListForm extends React.Component {
         <h1>To Do List</h1>
 
         <form onSubmit={this.handleSubmit}>
-          {this.state.editInput && (
-            <div>
-              <input type="text" value={this.state.todo} />
-              <button type="button">update</button>
-            </div>
-          )}
 
-          {/* <input type="text" name="name" style={{
-            display: this.state.editInput ? 'block' : 'none'
-          }} />
-          <button type="button" value="Update" style={{
-            display: this.state.editInput ? 'block' : 'none'
-          }}>update</button> */}
 
 
           <input type="text" name="name" value={this.state.value} onChange={this.handleInput} placeholder="Type things to do here" />
           <input type="submit" value="Add" />
           <div className="list">
             <h2>List</h2>
-            <div>
-              {/* {this.state.todos} */}
-              {this.state.todos.map((item, index) =>
-              (
-                <div className="todolist" key={item.todo + this.state.randomNum} style={{ textDecoration: item.done ? 'line-through' : 'none' }}>
-                  {item.todo}
+
+            {/* {this.state.todos} */}
+            {this.state.todos.map((item, index) =>
+            (
+              <div className="todolist" key={item.todo + this.state.randomNum} style={{ textDecoration: item.done ? 'line-through' : 'none' }}>
+                {this.state.editInput && (
+                  <div className="edit-input-container">
+                    <input type="text" defaultValue={this.state.updatedValue}  />
+                    <button type="button" onClick={() => this.updateEdit(index)}>update</button>
+                  </div>
+                )}
+                {item.todo}
+                <div className="buttons">
                   <button type='button' className="remove-btn" onClick={() => this.removeTodos(index)}>Remove</button>
                   <button type='button' className="edit-btn" onClick={() => this.editTodos(index)}>Edit</button>
                   <button type='button' className="done-btn" onClick={() => this.strikeThroughTodos(index)}>Done</button>
                 </div>
-              )
-              )}
 
-            </div>
+              </div>
+            )
+            )}
+
           </div>
+
 
         </form>
 
