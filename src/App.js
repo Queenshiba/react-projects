@@ -11,9 +11,7 @@ class ListForm extends React.Component {
       value: '',
       todos: [],
       editInput: false,
-      randomNum: '',
-      updatedValue: '',
-      editedText: ''
+      randomNum: ''
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,6 +19,7 @@ class ListForm extends React.Component {
     this.strikeThroughTodos = this.strikeThroughTodos.bind(this);
     this.removeTodos = this.removeTodos.bind(this);
     this.editTodos = this.editTodos.bind(this);
+    this.updateEdit = this.updateEdit.bind(this);
   }
 
   handleSubmit(e) {
@@ -33,13 +32,16 @@ class ListForm extends React.Component {
       }],
       value: '',
       editInput: false,
-      randomNum: randomNum
+      randomNum: randomNum,
+      updatedValue: ''
     })
     // console.log('handleSubmit')
   }
 
   handleInput(e) {
-    this.setState({ value: e.target.value })
+    this.setState({ value: e.target.value,
+      updatedValue: this.state.todos 
+    })
   }
 
   strikeThroughTodos = (selectedTodoIndex) => {
@@ -82,12 +84,17 @@ class ListForm extends React.Component {
     })
 
   }
-updateEdit = () => {
-console.log(this.state.updatedValue)
-// alert(this.state.todos)
+updateEdit = (e) => {
+
+
+
+
 this.setState({
-  editedText: this.state.value
+  updatedValue: e.target.value
 })
+
+console.log(this.state.updatedValue)
+console.log(this.state.todos)
 }
 
   render() {
@@ -110,8 +117,8 @@ this.setState({
               <div className="todolist" key={item.todo + this.state.randomNum} style={{ textDecoration: item.done ? 'line-through' : 'none' }}>
                 {this.state.editInput && (
                   <div className="edit-input-container">
-                    <input type="text" defaultValue={this.state.updatedValue}  />
-                    <button type="button" onClick={() => this.updateEdit(index)}>update</button>
+                    <input type="text" defaultValue={this.state.updatedValue}  onChange={e => this.updateEdit(e.target.value, this.state.todos)} />
+                    <button type="submit" >update</button>
                   </div>
                 )}
                 {item.todo}
