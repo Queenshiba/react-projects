@@ -11,15 +11,16 @@ class ListForm extends React.Component {
       value: '',
       todos: [],
       editInput: false,
-      randomNum: ''
+      randomNum: '',
+      updatedValue: ''
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleInput = this.handleInput.bind(this);
-    this.strikeThroughTodos = this.strikeThroughTodos.bind(this);
-    this.removeTodos = this.removeTodos.bind(this);
-    this.editTodos = this.editTodos.bind(this);
-    this.updateEdit = this.updateEdit.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleInput = this.handleInput.bind(this);
+    // this.strikeThroughTodos = this.strikeThroughTodos.bind(this);
+    // this.removeTodos = this.removeTodos.bind(this);
+    // this.showInputForEditTodos = this.showInputForEditTodos.bind(this);
+    // this.updateEditedText = this.updateEditedText.bind(this);
   }
 
   handleSubmit(e) {
@@ -32,15 +33,15 @@ class ListForm extends React.Component {
       }],
       value: '',
       editInput: false,
-      randomNum: randomNum,
-      updatedValue: ''
+      randomNum: randomNum
     })
     // console.log('handleSubmit')
   }
 
   handleInput(e) {
-    this.setState({ value: e.target.value,
-      updatedValue: this.state.todos 
+    this.setState({
+      value: e.target.value,
+
     })
   }
 
@@ -69,62 +70,71 @@ class ListForm extends React.Component {
     }, () => console.log(this.state.todos))
   }
 
+
+  showInputForEditTodos(){
+    this.setState({
+      editInput: true
+    })
+  }
+
+
+
   editTodos = (selectedTodoIndex) => {
 
     const edited = this.state.todos.map((todo, index) => {
       if (selectedTodoIndex === index) {
-        return todo.todo
+        todo.todo = this.state.updatedValue
       }
-
+      return todo
     });
 
+
+    console.log(edited)
     this.setState({
       todo: edited,
-      editInput: true
+      editInput: false
     })
 
   }
-updateEdit = (e) => {
+
+  handleEditInput(e) {
+    this.setState({
+      updatedValue: e.target.value,
+
+    })
+  }
 
 
 
 
-this.setState({
-  updatedValue: e.target.value
-})
 
-console.log(this.state.updatedValue)
-console.log(this.state.todos)
-}
 
   render() {
     return (
       <div className="wrap">
         <h1>To Do List</h1>
 
-        <form onSubmit={this.handleSubmit}>
-
-
-
-          <input type="text" name="name" value={this.state.value} onChange={this.handleInput} placeholder="Type things to do here" />
+        <form onSubmit={(e) => this.handleSubmit(e)}>
+          <input type="text" name="name" value={this.state.value} onChange={(e) => this.handleInput(e)} placeholder="Type things to do here" />
           <input type="submit" value="Add" />
           <div className="list">
             <h2>List</h2>
 
-            {/* {this.state.todos} */}
+
             {this.state.todos.map((item, index) =>
             (
               <div className="todolist" key={item.todo + this.state.randomNum} style={{ textDecoration: item.done ? 'line-through' : 'none' }}>
                 {this.state.editInput && (
                   <div className="edit-input-container">
-                    <input type="text" defaultValue={this.state.updatedValue}  onChange={e => this.updateEdit(e.target.value, this.state.todos)} />
-                    <button type="submit" >update</button>
+
+                    <input type="text" value={this.state.todo} onChange={(e)=> this.handleEditInput(e)}/>
+                    <button type="submit" onClick={() => this.editTodos()}>update</button>
                   </div>
                 )}
                 {item.todo}
                 <div className="buttons">
                   <button type='button' className="remove-btn" onClick={() => this.removeTodos(index)}>Remove</button>
-                  <button type='button' className="edit-btn" onClick={() => this.editTodos(index)}>Edit</button>
+                  <button type='button' className="edit-btn" onClick={() => this.showInputForEditTodos()}>Edit</button>
                   <button type='button' className="done-btn" onClick={() => this.strikeThroughTodos(index)}>Done</button>
                 </div>
 
