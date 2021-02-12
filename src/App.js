@@ -58,6 +58,7 @@ class ListForm extends React.Component {
     this.setState({
       todos: strikeThrough
     });
+    console.log(this.state.todos)
   }
 
   removeTodos = (index) => {
@@ -75,17 +76,18 @@ class ListForm extends React.Component {
   showInputForEditTodos(selectedTodoIndex){
 const selectedItem = this.state.todos.map((todo, index) => {
   if (selectedTodoIndex === index) {
-    todo.todo = this.state.updatedValue
+   
   }
-  return todo.todo
- 
+  // console.log(todo.todo)
+return todo.todo
 })
 
     this.setState({
       editInput: true,
       updatedValue: selectedItem
     })
-    console.log(this.state.todos)
+    console.log(selectedItem)
+    console.log(this.state.updatedValue)
   }
 
 // it's onChange and gets a value of the edited text
@@ -103,7 +105,7 @@ const selectedItem = this.state.todos.map((todo, index) => {
       if (selectedTodoIndex === index) {
         todo.todo = this.state.updatedValue
       }
-      return todo
+      return todo.todo
     });
 
     
@@ -142,7 +144,7 @@ console.log(this.state.updatedValue)
                 {item.todo}
                 <div className="buttons">
                   <button type='button' className="remove-btn" onClick={() => this.removeTodos(index)}>Remove</button>
-                  <button type='button' className="edit-btn" onClick={() => this.showInputForEditTodos()}>Edit</button>
+                  <button type='button' className="edit-btn"  onClick={() => this.showInputForEditTodos(index)}>Edit</button>
                   <button type='button' className="done-btn" onClick={() => this.strikeThroughTodos(index)}>Done</button>
                 </div>
 
