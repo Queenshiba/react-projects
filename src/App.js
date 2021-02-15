@@ -85,7 +85,7 @@ return todo.todo
     this.setState({
       editInput: true,
       updatedValue: selectedItem
-    })
+    }) 
     console.log(selectedItem)
     console.log(this.state.updatedValue)
   }
