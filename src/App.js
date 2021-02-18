@@ -79,14 +79,19 @@ class ListForm extends React.Component {
         return todo.todo
     
       }
-
-
     })
 
-    this.setState({
-      editInput: true,
-      updatedValue: selectedItem
-    })
+this.setState(() => {
+  return {
+    editInput : true,
+    updatedValue: selectedItem
+  }
+})
+
+    // this.setState({
+    //   editInput: true,
+    //   updatedValue: selectedItem
+    // })
     console.log(selectedItem)
     console.log(this.state.updatedValue)
   }
