@@ -10,7 +10,7 @@ class ListForm extends React.Component {
     this.state = {
       value: '',
       todos: [],
-      editInput: false,
+      openInputForEdit: false,
       randomNum: '',
       updatedValue: ''
     };
@@ -29,10 +29,11 @@ class ListForm extends React.Component {
     this.setState({
       todos: [...this.state.todos, {
         todo: this.state.value,
-        done: false
+        done: false,
+        openInputForEdit: false
       }],
       value: '',
-      editInput: false,
+
       randomNum: randomNum
     })
     // console.log('handleSubmit')
@@ -74,24 +75,24 @@ class ListForm extends React.Component {
 
   // Click 'Edit' button and show the input
   showInputForEditTodos(selectedTodoIndex) {
-    const selectedItem = this.state.todos.map((todo, index) => {
-      if (selectedTodoIndex === index) {
+    const selectedItem = this.state.todos.filter((todo, index) => {
+      if (index === selectedTodoIndex) {
+        todo.openInputForEdit = true
+
         return todo.todo
-    
+      } else {
+        todo.openInputForEdit = false
+        todo.todo = this.state.updatedValue
+        return todo.todo
       }
+
     })
 
-this.setState(() => {
-  return {
-    editInput : true,
-    updatedValue: selectedItem
-  }
-})
 
-    // this.setState({
-    //   editInput: true,
-    //   updatedValue: selectedItem
-    // })
+    this.setState({
+      openInputForEdit: true,
+      updatedValue: selectedItem
+    })
     console.log(selectedItem)
     console.log(this.state.updatedValue)
   }
@@ -140,10 +141,9 @@ this.setState(() => {
             {this.state.todos.map((item, index) =>
             (
               <div className="todolist" key={item.todo + this.state.randomNum} style={{ textDecoration: item.done ? 'line-through' : 'none' }}>
-                {this.state.editInput && (
-                  <div className="edit-input-container">
-
-                    <input type="text" key={index} value={this.state.updatedValue} onChange={(e) => this.handleEditInput(e)} />
+                {this.state.openInputForEdit && (
+                  <div className="edit-input-container" style={{ display: item.openInputForEdit ? 'true' : 'none' }}>
+                    <input type="text" key={item.todo + this.state.randomNum} value={this.state.updatedValue} onChange={(e) => this.handleEditInput(e)} />
                     <button type="submit" onClick={() => this.editTodos()}>update</button>
                   </div>
                 )}
