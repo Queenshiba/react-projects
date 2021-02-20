@@ -73,12 +73,12 @@ class ListForm extends React.Component {
   }
 
 
-  // Click 'Edit' button and show the input
+  // Click 'Edit' button and show the input that you selected
   showInputForEditTodos(selectedTodoIndex) {
-    const selectedItem = this.state.todos.filter((todo, index) => {
+    const selectedItem = this.state.todos.map((todo, index) => {
+      console.log(selectedTodoIndex)
       if (index === selectedTodoIndex) {
         todo.openInputForEdit = true
-
         return todo.todo
       } else {
         todo.openInputForEdit = false
@@ -142,8 +142,8 @@ class ListForm extends React.Component {
             (
               <div className="todolist" key={item.todo + this.state.randomNum} style={{ textDecoration: item.done ? 'line-through' : 'none' }}>
                 {this.state.openInputForEdit && (
-                  <div className="edit-input-container" style={{ display: item.openInputForEdit ? 'true' : 'none' }}>
-                    <input type="text" key={item.todo + this.state.randomNum} value={this.state.updatedValue} onChange={(e) => this.handleEditInput(e)} />
+                  <div className="edit-input-container">
+                    <input type="text" key={item + index} value={this.state.updatedValue} onChange={(e) => this.handleEditInput(e)} />
                     <button type="submit" onClick={() => this.editTodos()}>update</button>
                   </div>
                 )}
