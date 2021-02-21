@@ -36,7 +36,7 @@ class ListForm extends React.Component {
 
       randomNum: randomNum
     })
-    // console.log('handleSubmit')
+    
   }
 
   handleInput(e) {
@@ -75,26 +75,29 @@ class ListForm extends React.Component {
 
   // Click 'Edit' button and show the input that you selected
   showInputForEditTodos(selectedTodoIndex) {
+    let item = []
     const selectedItem = this.state.todos.map((todo, index) => {
-      console.log(selectedTodoIndex)
       if (index === selectedTodoIndex) {
+        item = todo.todo
         todo.openInputForEdit = true
-        return todo.todo
+        return item
+
       } else {
         todo.openInputForEdit = false
-        todo.todo = this.state.updatedValue
-        return todo.todo
+        // todo.todo = this.state.updatedValue
+        return ''
       }
 
     })
-
+    console.log(item)
 
     this.setState({
       openInputForEdit: true,
-      updatedValue: selectedItem
+      updatedValue: item
     })
     console.log(selectedItem)
     console.log(this.state.updatedValue)
+    console.log(this.state.todos)
   }
 
   // it's onChange and gets a value of the edited text
@@ -103,7 +106,7 @@ class ListForm extends React.Component {
     this.setState({
       updatedValue: e.target.value
     })
-    console.log(this.state.updatedValue)
+
   }
 
   // Click 'Update' button and save the edited text
@@ -142,11 +145,11 @@ class ListForm extends React.Component {
             (
               <div className="todolist" key={item.todo + this.state.randomNum} style={{ textDecoration: item.done ? 'line-through' : 'none' }}>
                 {this.state.openInputForEdit && (
-                  <div className="edit-input-container">
+                  <div className="edit-input-container" style={{ display: item.openInputForEdit ? true : 'none'}}>
                     <input type="text" key={item + index} value={this.state.updatedValue} onChange={(e) => this.handleEditInput(e)} />
                     <button type="submit" onClick={() => this.editTodos()}>update</button>
                   </div>
-                )}
+                )} 
                 {item.todo}
                 <div className="buttons">
                   <button type='button' className="remove-btn" onClick={() => this.removeTodos(index)}>Remove</button>
