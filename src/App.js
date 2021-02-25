@@ -81,15 +81,12 @@ class ListForm extends React.Component {
         item = todo.todo
         todo.openInputForEdit = true
         return item
-
       } else {
         todo.openInputForEdit = false
         // todo.todo = this.state.updatedValue
         return ''
       }
-
     })
-
 
     this.setState({
       openInputForEdit: true,
@@ -102,7 +99,6 @@ class ListForm extends React.Component {
   // it's onChange and gets a value of the edited text
   handleEditInput(e) {
 
-
     this.setState({
       updatedValue: e.target.value
     })
@@ -111,15 +107,18 @@ class ListForm extends React.Component {
 
   // Click 'Update' button and save the edited text
   editTodos = (selectedTodoIndex) => {
-    const edited = this.state.todos.filter((todo, index) => {
 
-      todo.todo = this.state.updatedValue
-
-
-      console.log(index)
-      console.log(selectedTodoIndex)
+    const edited = this.state.todos.map((todo, index) => {
+      // if (todo.todo === this.state.updatedValue) {
+      //   return 'haha'
+      // } else {
+      //   return 'no way'
+      // }
+      // this.state.todos.todo = this.state.updatedValue
+      return todo.todo = "wtf"
+      console.log(edited)
+      // console.log(selectedTodoIndex)
     });
-
 
     this.setState({
       updatedValue: edited,
