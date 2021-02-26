@@ -100,31 +100,24 @@ class ListForm extends React.Component {
   handleEditInput(e) {
 
     this.setState({
-      updatedValue: e.target.value
+      updatedValue: e.target.value,
+      newtext:this.state.updatedValue
     })
     console.log(this.state.updatedValue)
   }
 
   // Click 'Update' button and save the edited text
-  editTodos = (selectedTodoIndex) => {
+  editTodos = (selectedTodoIndex, i) => {
 
-    const edited = this.state.todos.map((todo, index) => {
-      // if (todo.todo === this.state.updatedValue) {
-      //   return 'haha'
-      // } else {
-      //   return 'no way'
-      // }
-      // this.state.todos.todo = this.state.updatedValue
-      return todo.todo = "wtf"
-      console.log(edited)
-      // console.log(selectedTodoIndex)
-    });
 
+console.log(this.state.newtext)
+
+console.log(this.state.updatedValue)
     this.setState({
-      updatedValue: edited,
+      updatedValue: this.state.newtext,
       openInputForEdit: false
     })
-    console.log(this.state.updatedValue)
+    
   }
 
 
@@ -149,7 +142,7 @@ class ListForm extends React.Component {
                 {this.state.openInputForEdit && (
                   <div className="edit-input-container" style={{ display: item.openInputForEdit ? true : 'none' }}>
                     <input type="text" key={item + index} value={this.state.updatedValue} onChange={(e) => this.handleEditInput(e)} />
-                    <button type="submit" onClick={() => this.editTodos()}>update</button>
+                    <button type="submit" onClick={(e) => this.editTodos(e)}>update</button>
                   </div>
                 )}
                 {item.todo}
