@@ -103,18 +103,20 @@ class ListForm extends React.Component {
       updatedValue: e.target.value
     })
     console.log(this.state.updatedValue)
+
   }
 
   // Click 'Update' button and save the edited text
   editTodos = (selectedTodoIndex) => {
 
-const updated = this.state.todos.forEach((todo, index) => {
-  console.log(todo.todo)
-  console.log(this.state.updatedValue)
+const updated = this.state.todos.map((todo, index) => {
+
 return todo.todo = this.state.updatedValue
+
 })
 
-// console.log(this.state.updatedValue)
+
+console.log(this.state.todos.todo)
 
     this.setState({
       updatedValue: updated,
