@@ -109,72 +109,76 @@ class ListForm extends React.Component {
   // Click 'Update' button and save the edited text
   editTodos = (selectedTodoIndex) => {
 
-const updated = this.state.todos.map((todo, index) => {
+    const updated = this.state.todos.map((todo, index) => {
+      todo.todo = this.state.updatedValue
+      if (todo.todo === this.state.updatedValue) {
+        return 'yes'
+      } else {
+        return 'nope'
+      }
+      })
+    
+  
 
-return todo.todo = this.state.updatedValue
-
-})
-
-
-console.log(this.state.todos.todo)
+  console.log(this.state.todos.todo)
 
     this.setState({
-      updatedValue: updated,
-      openInputForEdit: false
-    })
+    updatedValue: updated,
+    openInputForEdit: false
+  })
     
   }
 
 
 
 
-  render() {
-    return (
-      <div className="wrap">
-        <h1>To Do List</h1>
+render() {
+  return (
+    <div className="wrap">
+      <h1>To Do List</h1>
 
-        {this.state.updatedValue}
-        <form onSubmit={(e) => this.handleSubmit(e)}>
-          <input type="text" name="name" value={this.state.value} onChange={(e) => this.handleInput(e)} placeholder="Type things to do here" />
-          <input type="submit" value="Add" />
-          <div className="list">
-            <h2>List</h2>
+      {this.state.updatedValue}
+      <form onSubmit={(e) => this.handleSubmit(e)}>
+        <input type="text" name="name" value={this.state.value} onChange={(e) => this.handleInput(e)} placeholder="Type things to do here" />
+        <input type="submit" value="Add" />
+        <div className="list">
+          <h2>List</h2>
 
 
-            {this.state.todos.map((item, index) =>
-            (
-              <div className="todolist" key={item.todo + this.state.randomNum} style={{ textDecoration: item.done ? 'line-through' : 'none' }}>
-                {this.state.openInputForEdit && (
-                  <div className="edit-input-container" style={{ display: item.openInputForEdit ? true : 'none' }}>
-                    <input type="text" key={item + index} value={this.state.updatedValue} onChange={(e) => this.handleEditInput(e)} />
-                    <button type="submit" onClick={(e) => this.editTodos(e)}>update</button>
-                  </div>
-                )}
-                {item.todo}
-                <div className="buttons">
-                  <button type='button' className="remove-btn" onClick={() => this.removeTodos(index)}>Remove</button>
-                  <button type='button' className="edit-btn" onClick={() => this.showInputForEditTodos(index)}>Edit</button>
-                  <button type='button' className="done-btn" onClick={() => this.strikeThroughTodos(index)}>Done</button>
+          {this.state.todos.map((item, index) =>
+          (
+            <div className="todolist" key={item.todo + this.state.randomNum} style={{ textDecoration: item.done ? 'line-through' : 'none' }}>
+              {this.state.openInputForEdit && (
+                <div className="edit-input-container" style={{ display: item.openInputForEdit ? true : 'none' }}>
+                  <input type="text" key={item + index} value={this.state.updatedValue} onChange={(e) => this.handleEditInput(e)} />
+                  <button type="submit" onClick={(e) => this.editTodos(e)}>update</button>
                 </div>
-
+              )}
+              {item.todo}
+              <div className="buttons">
+                <button type='button' className="remove-btn" onClick={() => this.removeTodos(index)}>Remove</button>
+                <button type='button' className="edit-btn" onClick={() => this.showInputForEditTodos(index)}>Edit</button>
+                <button type='button' className="done-btn" onClick={() => this.strikeThroughTodos(index)}>Done</button>
               </div>
-            )
-            )}
 
-          </div>
+            </div>
+          )
+          )}
 
-
-        </form>
-
-      </div>
+        </div>
 
 
+      </form>
+
+    </div>
 
 
 
-    );
 
-  }
+
+  );
+
+}
 
 }
 
